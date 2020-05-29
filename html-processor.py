@@ -10,34 +10,34 @@ def repl(m): # replace function
     else:
         return ' '
 
-rexp1 = re.compile(r'<title>(.+?)</title') # Ερώτημα 1
-rexp2 = re.compile(r'<!--(.*?)-->',re.DOTALL) # Ερώτημα 2
-rexp3 = re.compile(r'<(script|style).*?>.*?</(script|style)>',re.DOTALL) # Ερώτημα 3, μπορούμε να βάλουμε και </\1 αντί για (script|style) τη δεύτερη φορά
-rexp4 = re.compile(r'<a.+?href="(.*?)".*?>(.*?)</a>',re.DOTALL) # Ερώτημα 4
-rexp5a = re.compile(r'<.+?>|</.+?>',re.DOTALL) # Ερώτημα 5α, Για tag παρόμοια με <something> ... </something> και για να αφαιρεθεί το </html> στο τέλος και tag παρόμοια με αυτό
-rexp5b = re.compile(r'<.+?/>',re.DOTALL) # Ερώτημα 5β, Για tag παρόμοια με < something />
-rexp6 = re.compile(r'&(amp|gt|lt|nbsp);') # Ερώτημα 6
-rexp7 = re.compile(r'\s+') # Ερώτημα 7
+rexp1 = re.compile(r'<title>(.+?)</title') # Erwthma 1
+rexp2 = re.compile(r'<!--(.*?)-->',re.DOTALL) # Erwthma 2
+rexp3 = re.compile(r'<(script|style).*?>.*?</(script|style)>',re.DOTALL) # Erwthma 3, mporoyme na valoyme kai </\1 anti gia (script|style) th deyterh fora
+rexp4 = re.compile(r'<a.+?href="(.*?)".*?>(.*?)</a>',re.DOTALL) # Erwthma 4
+rexp5a = re.compile(r'<.+?>|</.+?>',re.DOTALL) # Erwthma 5a, gia tag paromoia me <something> ... </something> kai gia na afairethei to </html> sto telos toy txt arxeioy kathws kai tag paromoia me ayto
+rexp5b = re.compile(r'<.+?/>',re.DOTALL) # Erwthma 5b, gia tag paromoia me < something />
+rexp6 = re.compile(r'&(amp|gt|lt|nbsp);') # Erwthma 6
+rexp7 = re.compile(r'\s+') # Erwthma 7
 
 
-with open('testpage.txt', 'r') as f: # function για άνοιγμα του αρχείου
+with open('testpage.txt', 'r') as f: # function gia anoigma toy arxeioy
 
     contents = f.read()
     m = rexp1.search(contents)
-    print(m.group(1)) # εκτύπωση τίτλου
+    print(m.group(1)) # ektypwsh titloy
 
-    contents = rexp2.sub(' ', contents) # αντικατάσταση των σχολίων με κενό
+    contents = rexp2.sub(' ', contents) # antikatastash twn sxoliwn me keno
 
-    contents = rexp3.sub(' ', contents) # αντικατάσταση περιεχομένων και style, script tags με το κενό
+    contents = rexp3.sub(' ', contents) # antikatastash twn periexomenwn kai style, script tags me to keno
 
     for m in rexp4.finditer(contents):
-        print('{} {}'.format(m.group(1),m.group(2))) # επιλέγει και εκτυπώνει τα link που βρίσκονται μέσα στην κανονική έκφραση rexp4
+        print('{} {}'.format(m.group(1),m.group(2))) # epilegei kai ektypwnei ta links poy vriskontai mesa sthn kanonikh ekfrash rexp4
 
-    contents = rexp5a.sub(' ', contents) # απαλοιφή tag part 1
-    contents = rexp5b.sub(' ', contents) # απαλοιφή tag part 2
+    contents = rexp5a.sub(' ', contents) # apaloifh tag part 1
+    contents = rexp5b.sub(' ', contents) # apaloifh tag part 2
 
-    contents = rexp6.sub(repl, contents) # σντικατάσταση html entities
+    contents = rexp6.sub(repl, contents) # antikatastash html entities
 
-    contents = rexp7.sub(' ', contents) # αντικατάσταση συνεχόμενων κενών με ένα κενό
+    contents = rexp7.sub(' ', contents) # antikatastash synexomenwn kenwn me ena keno
 
-    print(contents) # Εκτύπωση όλου του κειμένου μετά τις μετατροπές
+    print(contents) # ektypwsh oloy toy keimenoy meta tis metatropes
