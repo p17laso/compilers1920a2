@@ -10,7 +10,7 @@ def repl(m): # replace function
     else:
         return ' '
 
-rexp1 = re.compile(r'<title>(.+?)</title') # Erwthma 1
+rexp1 = re.compile(r'<title>(.+?)</title>') # Erwthma 1
 rexp2 = re.compile(r'<!--(.*?)-->',re.DOTALL) # Erwthma 2
 rexp3 = re.compile(r'<(script|style).*?>.*?</(script|style)>',re.DOTALL) # Erwthma 3, mporoyme na valoyme kai </\1 anti gia (script|style) th deyterh fora
 rexp4 = re.compile(r'<a.+?href="(.*?)".*?>(.*?)</a>',re.DOTALL) # Erwthma 4
